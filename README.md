@@ -1,5 +1,9 @@
 # ARTH - Task 11 👨🏻‍💻
 
+Writing a playbok forConfiguring hadoop cluster over AWS using Ansible automation technology.
+
+#HADOOP #ANSIBLE #AWS
+
 ![](images/task.jpeg)
 
 Task Description📄
