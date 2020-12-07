@@ -1,0 +1,44 @@
+
+- hosts: all
+  tasks:
+
+  - name: "sending jdk software to targetNode"
+    copy:
+           dest: "/root"
+           src: "/home/ec2-user/jdk-8u171-linux-x64.rpm"
+
+  - name: "sending hadoop software to targetNode"
+    copy:
+           dest: "/root"
+           src: "/home/ec2-user/hadoop-1.2.1-1.x86_64.rpm"
+
+  - name: "installing Jdk software"
+    command: "rpm -i jdk-8u171-linux-x64.rpm"
+
+  - name: "installing hadoop software"
+    command: "rpm -i hadoop-1.2.1-1.x86_64.rpm --force"
+
+
+    #NAME NwODE SETUP
+
+- hosts: mynamenode
+
+  tasks:
+
+  - name: "create a directory"
+    file:
+           state: directory
+           path: "/nn"
+
+  - name: "hdfs-site file in namenode"
+    template:
+           dest: "/etc/hadoop/hdfs-site.xml"
+           src: "nn_hdfs.xml"
+
+  - name: " core-sitee file in namenode"
+    template:
+           dest: "/etc/hadoop/core-site.xml"
+           src: "nn_core.xml"
+
+  - name: "starting namenode service"
+    command: "hadoop-daemon.sh start namenode"
