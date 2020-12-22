@@ -8,10 +8,25 @@ Writing a playbok forConfiguring hadoop cluster over AWS using Ansible automatio
 
 Task Description📄
 
-🔰 11.1 Configure Hadoop and start cluster services using Ansible Playbook
+Configure Hadoop and start cluster services using Ansible Playbook
+ 
 
-🔰 11.2 Create a Article, blog or Video on how industries are solving challenges using Ansible.
 
-🔰 11.3 Restarting HTTPD Service is not idempotence in nature and also consume more resources suggest a way to rectify this challenge in Ansible playbook
+![](images/playbook_output.jpg)
 
-![](images/output.jpg)
+![](images/cli_namenode_output.jpg)
+
+![](images/aws_output.jpg)
+
+MediumLink:
+https://akshay-anil-blogs.medium.com/rh294-ansible-automation-configuring-hadoop-cluster-in-one-click-5a8bd2d6414d
+
+YoutubeLink:
+https://youtu.be/nEPTxHsZFSY
+
+Website:
+https://akshayanil1080.github.io/mywebsite/
+
+
+
+

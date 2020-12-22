@@ -1,4 +1,3 @@
-
 - hosts: all
   tasks:
 
@@ -14,17 +13,22 @@
 
   - name: "installing Jdk software"
     command: "rpm -i jdk-8u171-linux-x64.rpm"
+    ignore_errors: yes
+
 
   - name: "installing hadoop software"
     command: "rpm -i hadoop-1.2.1-1.x86_64.rpm --force"
+    ignore_errors: yes
 
 
-    #NAME NwODE SETUP
+    #NAME NODE SETUP
 
 - hosts: mynamenode
 
   tasks:
-
+  - name: "deleting the previous directory"
+    shell: "rm -rf /nn"
+    ignore_errors: yes
   - name: "create a directory"
     file:
            state: directory
@@ -35,10 +39,47 @@
            dest: "/etc/hadoop/hdfs-site.xml"
            src: "nn_hdfs.xml"
 
-  - name: " core-sitee file in namenode"
+  - name: " core-site file in namenode"
     template:
            dest: "/etc/hadoop/core-site.xml"
            src: "nn_core.xml"
+  - name: "formatting the namemode"
+    shell: "echo Y  |  hadoop  namenode  -format"
+
+
+  - name: "stopping namenode service"
+    command: "hadoop-daemon.sh stop  namenode"
 
   - name: "starting namenode service"
     command: "hadoop-daemon.sh start namenode"
+
+     #DATA NODE
+- hosts: mydatanode
+
+  tasks:
+
+  - name: "deleting the previous directory"
+    shell: "rm -rf /dn"
+    ignore_errors: yes
+
+  - name: "craete a directory"
+    file:
+           state: directory
+           path: "/dn"
+
+  - name: "hdfs-site file in datanode"
+    template:
+           dest: "/etc/hadoop/hdfs-site.xml"
+           src: "dn_hdfs.xml"
+
+  - name: " core-sitee file in datanode"
+    template:
+           dest: "/etc/hadoop/core-site.xml"
+           src: "dn_core.xml"
+
+  - name: "stopping  datanode service"
+    command: "hadoop-daemon.sh stop  datanode"
+    ignore_errors: yes
+
+  - name: "starting datanode service"
+    command: "hadoop-daemon.sh start datanode"
